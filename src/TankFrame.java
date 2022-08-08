@@ -6,7 +6,10 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame{
 
-    int x = 100, y = 100;
+    int x = 200, y = 200;
+    Dir dir = Dir.DOWN;
+    private static final int SPEED =10;
+
 
     public TankFrame(){
         setSize(800,600);//设置大小
@@ -28,6 +31,22 @@ public class TankFrame extends Frame{
     @Override
     public void paint(Graphics g){
         g.fillRect(x,y,40,40);
+        switch (dir){
+            case LEFT:
+                x-=SPEED;
+                break;
+            case UP:
+                y-=SPEED;
+                break;
+            case RIGHT:
+                x+=SPEED;
+                break;
+            case DOWN:
+                y+=SPEED;
+                break;
+            default:
+                break;
+        }
     }
 
     // 一个匿名类
@@ -56,7 +75,7 @@ public class TankFrame extends Frame{
                 default:
                     break;
             }
-            System.out.println("keyPressed");
+            setMainTaqnkDir();
         }
 
         @Override
@@ -78,7 +97,14 @@ public class TankFrame extends Frame{
                 default:
                     break;
             }
-            System.out.println("keyReleased");
+            setMainTaqnkDir();
+        }
+
+        private  void setMainTaqnkDir(){
+            if(bL) dir =Dir.LEFT;
+            if(bU) dir =Dir.UP;
+            if(bR) dir =Dir.RIGHT;
+            if(bD) dir =Dir.DOWN;
         }
     }
 
